@@ -17,6 +17,8 @@ func main() {
 		printDayHeader("1")
 		resultPart1 := day1.GetTotalDistance("./src/internal/app/day1/input_data.txt")
 		printProblemTitleAndAnswer("Part 1", resultPart1)
+		resultPart2 := day1.GetSimilarityScore("./src/internal/app/day1/input_data.txt")
+		printProblemTitleAndAnswer("Part 2", resultPart2)
 		return
 	}
 

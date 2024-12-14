@@ -31,6 +31,25 @@ func GetTotalDistance(filename string) int {
 	return totalDistance
 }
 
+func GetSimilarityScore(filename string) int {
+	// clean/format data into 2 slices
+	lines, err := utilities.GetLinesFromFile(filename)
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+		return 0
+	}
+	left, right := getLocationLists(lines)
+
+	// get similarity score
+	similarityScore := 0
+	frequenciesInRight := countFreqencies(right)
+	for _, num := range left {
+		similarityScore += (num * frequenciesInRight[num])
+	}
+
+	return similarityScore
+}
+
 func getLocationLists(data []string) ([]int, []int) {
 	left := []int{}
 	right := []int{}
@@ -55,4 +74,13 @@ func getLocationLists(data []string) ([]int, []int) {
 	}
 
 	return left, right
+}
+
+func countFreqencies(list []int) map[int]int {
+	frequencies := make(map[int]int)
+	for _, num := range list {
+		frequencies[num]++
+	}
+
+	return frequencies
 }
